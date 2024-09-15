@@ -1,4 +1,10 @@
 ---
+import { createClient } from '@libsql/client'
+console.log("TURSO_URL", import.meta.env.TURSO_URL)
+console.log("TURSO_AUTH_TOKEN", import.meta.env.TURSO_AUTH_TOKEN)
+const client = createClient({url: import.meta.env.TURSO_URL!, authToken: import.meta.env.TURSO_AUTH_TOKEN!})
+
+const data = await client.execute(`SELECT * FROM users LIMIT 10`)
 
 ---
 
@@ -12,5 +18,8 @@
 	</head>
 	<body>
 		<h1>Astro</h1>
+		<div>
+			<pre>{JSON.stringify(data, null, 2)}</pre>
+		</div>
 	</body>
 </html>
